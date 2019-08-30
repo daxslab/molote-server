@@ -1,0 +1,6 @@
+you need to run the following migrations:
+
+1- php yii migrate
+2- php yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
+3- php yii migrate/up --migrationPath=@yii/rbac/migrations
+
