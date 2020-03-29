@@ -6,7 +6,7 @@ use yii\db\Migration;
  * Handles the creation of table `{{%report}}`.
  * Has foreign keys to the tables:
  *
- * - `{{%pothole}}`
+ * - `{{%crowd}}`
  */
 class m190829_042436_create_report_table extends Migration
 {
@@ -19,24 +19,24 @@ class m190829_042436_create_report_table extends Migration
             'id' => $this->primaryKey(),
             'location' => 'point not null',
             'device_uuid' => $this->string()->notNull(),
-            'pothole_id' => $this->integer()->notNull(),
+            'crowd_id' => $this->integer()->notNull(),
             'additional_data' => $this->text(),
             'created_at' => $this->datetime()->notNull(),
         ]);
 
-        // creates index for column `pothole_id`
+        // creates index for column `crowd_id`
         $this->createIndex(
-            '{{%idx-report-pothole_id}}',
+            '{{%idx-report-crowd_id}}',
             '{{%report}}',
-            'pothole_id'
+            'crowd_id'
         );
 
-        // add foreign key for table `{{%pothole}}`
+        // add foreign key for table `{{%crowd}}`
         $this->addForeignKey(
-            '{{%fk-report-pothole_id}}',
+            '{{%fk-report-crowd_id}}',
             '{{%report}}',
-            'pothole_id',
-            '{{%pothole}}',
+            'crowd_id',
+            '{{%crowd}}',
             'id',
             'NO ACTION',
             'CASCADE'
@@ -48,15 +48,15 @@ class m190829_042436_create_report_table extends Migration
      */
     public function safeDown()
     {
-        // drops foreign key for table `{{%pothole}}`
+        // drops foreign key for table `{{%crowd}}`
         $this->dropForeignKey(
-            '{{%fk-report-pothole_id}}',
+            '{{%fk-report-crowd_id}}',
             '{{%report}}'
         );
 
-        // drops index for column `pothole_id`
+        // drops index for column `crowd_id`
         $this->dropIndex(
-            '{{%idx-report-pothole_id}}',
+            '{{%idx-report-crowd_id}}',
             '{{%report}}'
         );
 

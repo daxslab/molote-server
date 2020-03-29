@@ -13,11 +13,11 @@ use yii\db\Expression;
  * @property int $id
  * @property string $location
  * @property string $device_uuid
- * @property int $pothole_id
+ * @property int $crowd_id
  * @property string $additional_data
  * @property string $created_at
  *
- * @property Pothole $pothole
+ * @property Crowd $crowd
  *
  */
 class Report extends ActiveRecord
@@ -36,12 +36,12 @@ class Report extends ActiveRecord
     public function rules()
     {
         return [
-            [['location', 'pothole_id'], 'required'],
+            [['location', 'crowd_id'], 'required'],
             [['location', 'additional_data'], 'string'],
-            [['pothole_id'], 'integer'],
+            [['crowd_id'], 'integer'],
             [['created_at'], 'safe'],
             [['device_uuid'], 'string', 'max' => 255],
-            [['pothole_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pothole::className(), 'targetAttribute' => ['pothole_id' => 'id']],
+            [['crowd_id'], 'exist', 'skipOnError' => true, 'targetClass' => Crowd::className(), 'targetAttribute' => ['crowd_id' => 'id']],
         ];
     }
 
@@ -54,7 +54,7 @@ class Report extends ActiveRecord
             'id' => 'ID',
             'location' => 'Location',
             'device_uuid' => 'Device Uuid',
-            'pothole_id' => 'Pothole ID',
+            'crowd_id' => 'Crowd ID',
             'additional_data' => 'Additional Data',
             'created_at' => 'Created At',
         ];
@@ -63,9 +63,9 @@ class Report extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPothole()
+    public function getCrowd()
     {
-        return $this->hasOne(Pothole::className(), ['id' => 'pothole_id']);
+        return $this->hasOne(Crowd::className(), ['id' => 'crowd_id']);
     }
 
 

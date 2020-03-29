@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Pothole;
+use common\models\Crowd;
 
 /**
- * PotholeSearch represents the model behind the search form of `common\models\Pothole`.
+ * CrowdSearch represents the model behind the search form of `common\models\Crowd`.
  */
-class PotholeSearch extends Pothole
+class CrowdSearch extends Crowd
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class PotholeSearch extends Pothole
      */
     public function search($params)
     {
-        $query = Pothole::find()->where();
+        $query = Crowd::find()->where();
 
         // add conditions that should always apply here
 

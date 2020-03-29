@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Pothole */
+/* @var $model common\models\Crowd */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Potholes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Crowds', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="pothole-view">
+<div class="crowd-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

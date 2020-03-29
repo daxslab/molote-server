@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Pothole */
+/* @var $model common\models\Crowd */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pothole-form">
+<div class="crowd-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%pothole}}`.
+ * Handles the creation of table `{{%crowd}}`.
  */
-class m190829_041622_create_pothole_table extends Migration
+class m190829_041622_create_crowd_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%pothole}}', [
+        $this->createTable('{{%crowd}}', [
             'id' => $this->primaryKey(),
             'location' => 'point not null',
             'reports_count' => $this->integer()->notNull(),
@@ -26,6 +26,6 @@ class m190829_041622_create_pothole_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%pothole}}');
+        $this->dropTable('{{%crowd}}');
     }
 }

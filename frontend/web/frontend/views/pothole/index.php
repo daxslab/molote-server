@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\PotholeSearch */
+/* @var $searchModel common\models\CrowdSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Potholes';
+$this->title = 'Crowds';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pothole-index">
+<div class="crowd-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Pothole', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Crowd', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

@@ -8,7 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "pothole".
+ * This is the model class for table "crowd".
  *
  * @property int $id
  * @property string $location
@@ -19,18 +19,18 @@ use yii\db\Expression;
  * @property Report[] $reports
  *
  */
-class Pothole extends ActiveRecord
+class Crowd extends ActiveRecord
 {
 
     public static $REPORTS_TRUST_NUMBER = 1;
-    public static $POTHOLE_RADIUS = 0.008;
+    public static $CROWD_RADIUS = 0.008;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'pothole';
+        return 'crowd';
     }
 
     /**
@@ -65,7 +65,7 @@ class Pothole extends ActiveRecord
      */
     public function getReports()
     {
-        return $this->hasMany(Report::className(), ['pothole_id' => 'id']);
+        return $this->hasMany(Report::className(), ['crowd_id' => 'id']);
     }
 
     public function behaviors()
@@ -85,11 +85,11 @@ class Pothole extends ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return PotholeQuery the active query used by this AR class.
+     * @return CrowdQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new PotholeQuery(get_called_class());
+        return new CrowdQuery(get_called_class());
     }
 
 }

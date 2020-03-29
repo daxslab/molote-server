@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use common\models\Pothole;
+use common\models\Crowd;
 use Yii;
 use common\models\Report;
-use common\models\PotholeSearch;
+use common\models\CrowdSearch;
 use yii\filters\Cors;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,25 +61,25 @@ class ReportController extends Controller
             $reportModel->location = "{\"type\":\"Point\",\"coordinates\":[{$lat},{$lng}]}";
             $reportModel->device_uuid = Yii::$app->request->post()['uuid'];
 
-            $sameReport = Report::find()->where(['device_uuid' => $reportModel->device_uuid])->nearest($reportModel->location, 'location', Pothole::$POTHOLE_RADIUS)->one();
+            $sameReport = Report::find()->where(['device_uuid' => $reportModel->device_uuid])->nearest($reportModel->location, 'location', Crowd::$CROWD_RADIUS)->one();
             if (!empty($sameReport)){
-                return $this->asJson(['status' => 403, 'errorCode' => 5, 'message' => 'You can\'t create two reports of the same pothole']);
+                return $this->asJson(['status' => 403, 'errorCode' => 5, 'message' => 'You can\'t create two reports of the same crowd']);
             }
 
             $reportModel->additional_data = isset(Yii::$app->request->post()['additional_data']) ? Yii::$app->request->post()['additional_data'] : null;
 
-            $nearestPothole = Pothole::find()->nearest($reportModel->location, 'location', Pothole::$POTHOLE_RADIUS)->one();
-            if (empty($nearestPothole)) {
-                $nearestPothole = new Pothole();
-                $nearestPothole->location = $reportModel->location;
-                $nearestPothole->reports_count = 0;
-                $nearestPothole->save();
+            $nearestCrowd = Crowd::find()->nearest($reportModel->location, 'location', Crowd::$CROWD_RADIUS)->one();
+            if (empty($nearestCrowd)) {
+                $nearestCrowd = new Crowd();
+                $nearestCrowd->location = $reportModel->location;
+                $nearestCrowd->reports_count = 0;
+                $nearestCrowd->save();
             }
-            $reportModel->pothole_id = $nearestPothole->id;
+            $reportModel->crowd_id = $nearestCrowd->id;
             $reportModel->save();
 
-            $nearestPothole->reports_count++;
-            $nearestPothole->save();
+            $nearestCrowd->reports_count++;
+            $nearestCrowd->save();
 
             return $this->asJson(['status' => 200, 'message' => 'Report Created Successfully']);
         }

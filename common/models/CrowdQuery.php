@@ -4,11 +4,11 @@ namespace common\models;
 
 use sjaakp\spatial\ActiveQuery;
 /**
- * This is the ActiveQuery class for [[Pothole]].
+ * This is the ActiveQuery class for [[Crowd]].
  *
- * @see Pothole
+ * @see Crowd
  */
-class PotholeQuery extends ActiveQuery
+class CrowdQuery extends ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class PotholeQuery extends ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Pothole[]|array
+     * @return Crowd[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class PotholeQuery extends ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Pothole|array|null
+     * @return Crowd|array|null
      */
     public function one($db = null)
     {

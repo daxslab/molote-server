@@ -17,7 +17,7 @@ class ReportSearch extends Report
     public function rules()
     {
         return [
-            [['id', 'pothole_id'], 'integer'],
+            [['id', 'crowd_id'], 'integer'],
             [['location', 'created_at'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class ReportSearch extends Report
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'pothole_id' => $this->pothole_id,
+            'crowd_id' => $this->crowd_id,
             'created_at' => $this->created_at,
         ]);
 

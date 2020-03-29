@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PotholeSearch */
+/* @var $model common\models\CrowdSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pothole-search">
+<div class="crowd-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

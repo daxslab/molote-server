@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Pothole;
-use common\models\PotholeSearch;
+use common\models\Crowd;
+use common\models\CrowdSearch;
 use yii\filters\Cors;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PotholeController implements the CRUD actions for Pothole model.
+ * CrowdController implements the CRUD actions for Crowd model.
  */
-class PotholeController extends Controller
+class CrowdController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -45,12 +45,12 @@ class PotholeController extends Controller
     }
 
     /**
-     * Lists all Pothole models.
+     * Lists all Crowd models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PotholeSearch();
+        $searchModel = new CrowdSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,12 +60,12 @@ class PotholeController extends Controller
     }
 
     public function actionGetTrusties(){
-        $potholes = Pothole::find()->where(['>=', 'reports_count', Pothole::$REPORTS_TRUST_NUMBER])->all();
-        return $this->asJson(['code' => 200, 'message' => 'OK', 'data' => $potholes]);
+        $crowds = Crowd::find()->where(['>=', 'reports_count', Crowd::$REPORTS_TRUST_NUMBER])->all();
+        return $this->asJson(['code' => 200, 'message' => 'OK', 'data' => $crowds]);
     }
 
     /**
-     * Updates an existing Pothole model.
+     * Updates an existing Crowd model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,15 +86,15 @@ class PotholeController extends Controller
 
 
     /**
-     * Finds the Pothole model based on its primary key value.
+     * Finds the Crowd model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Pothole the loaded model
+     * @return Crowd the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pothole::findOne($id)) !== null) {
+        if (($model = Crowd::findOne($id)) !== null) {
             return $model;
         }
 
