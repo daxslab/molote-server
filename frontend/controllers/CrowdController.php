@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Crowd;
 use common\models\CrowdSearch;
+use yii\db\Expression;
 use yii\filters\Cors;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -59,8 +60,13 @@ class CrowdController extends Controller
         ]);
     }
 
-    public function actionGetTrusties(){
-        $crowds = Crowd::find()->where(['>=', 'reports_count', Crowd::$REPORTS_TRUST_NUMBER])->all();
+    public function actionGetTrusties()
+    {
+        $crowds = Crowd::find()
+            ->joinWith('reports')
+            ->select(['crowd.*', 'report.created_at'])
+            ->andWhere(['>=', 'reports_count', Crowd::$REPORTS_TRUST_NUMBER])
+            ->andWhere(['>=', 'report.created_at', new Expression('DATE_SUB(NOW(), INTERVAL 12 HOUR)')])->all();
         return $this->asJson(['code' => 200, 'message' => 'OK', 'data' => $crowds]);
     }
 
