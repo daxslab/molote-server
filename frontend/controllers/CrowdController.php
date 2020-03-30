@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Report;
 use Yii;
 use common\models\Crowd;
 use common\models\CrowdSearch;
@@ -62,11 +63,18 @@ class CrowdController extends Controller
 
     public function actionGetTrusties()
     {
+
+        $crowds_ids = Yii::$app->db
+            ->createCommand(
+                'SELECT crowd_id from report WHERE created_at >= DATE_SUB(NOW(), INTERVAL :reports_life_time HOUR) GROUP BY crowd_id',
+                ['reports_life_time' => Crowd::$REPORTS_LIFE_TIME]
+            )->queryColumn();
+
         $crowds = Crowd::find()
-            ->joinWith('reports')
-            ->select(['crowd.*', 'report.created_at'])
+            ->andwhere(['in', 'id', $crowds_ids])
             ->andWhere(['>=', 'reports_count', Crowd::$REPORTS_TRUST_NUMBER])
-            ->andWhere(['>=', 'report.created_at', new Expression('DATE_SUB(NOW(), INTERVAL 12 HOUR)')])->all();
+            ->all();
+
         return $this->asJson(['code' => 200, 'message' => 'OK', 'data' => $crowds]);
     }
 

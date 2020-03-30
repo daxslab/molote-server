@@ -23,6 +23,7 @@ class Crowd extends ActiveRecord
 {
 
     public static $REPORTS_TRUST_NUMBER = 1;
+    public static $REPORTS_LIFE_TIME = 12; //hours
     public static $CROWD_RADIUS = 0.008;
 
     /**
