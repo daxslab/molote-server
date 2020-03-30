@@ -46,49 +46,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Creates a new Report model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function actionCreate()
-    {
-        $reportModel = new Report();
-
-        if (isset(Yii::$app->request->post()['lat']) && isset(Yii::$app->request->post()['lng']) && isset(Yii::$app->request->post()['uuid'])) {
-            $lat = Yii::$app->request->post()['lat'];
-            $lng = Yii::$app->request->post()['lng'];
-            $reportModel->location = "{\"type\":\"Point\",\"coordinates\":[{$lat},{$lng}]}";
-            $reportModel->device_uuid = Yii::$app->request->post()['uuid'];
-
-            $sameReport = Report::find()->where(['device_uuid' => $reportModel->device_uuid])->nearest($reportModel->location, 'location', Crowd::$CROWD_RADIUS)->one();
-            if (!empty($sameReport)){
-                return $this->asJson(['status' => 403, 'errorCode' => 5, 'message' => 'You can\'t create two reports of the same crowd']);
-            }
-
-            $reportModel->additional_data = isset(Yii::$app->request->post()['additional_data']) ? Yii::$app->request->post()['additional_data'] : null;
-
-            $nearestCrowd = Crowd::find()->nearest($reportModel->location, 'location', Crowd::$CROWD_RADIUS)->one();
-            if (empty($nearestCrowd)) {
-                $nearestCrowd = new Crowd();
-                $nearestCrowd->location = $reportModel->location;
-                $nearestCrowd->reports_count = 0;
-                $nearestCrowd->save();
-            }
-            $reportModel->crowd_id = $nearestCrowd->id;
-            $reportModel->save();
-
-            $nearestCrowd->reports_count++;
-            $nearestCrowd->save();
-
-            return $this->asJson(['status' => 200, 'message' => 'Report Created Successfully']);
-        }
-
-        return $this->asJson(['status' => 400, 'message' => 'Bad Request', 'data' => Yii::$app->request]);
-    }
-
-
-    /**
      * Finds the Report model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
